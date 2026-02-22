@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-4">Atletas</h1>
+
+<div class="flex justify-between mb-4">
+    <a href="/cadastrar_atleta" class="bg-indigo-600 text-white px-4 py-2 rounded-lg">
+        + Cadastrar
+    </a>
+
+    <form method="GET">
+        <select name="categoria" onchange="this.form.submit()" class="border p-2 rounded-lg">
+            <option value="">Todas</option>
+            {% for cat in categorias %}
+                <option value="{{ cat }}">{{ cat }}</option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+
+<table class="w-full">
+    <thead class="bg-gray-200">
+        <tr>
+            <th class="p-2">Nome</th>
+            <th>CPF</th>
+            <th>Categoria</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for atleta in atletas %}
+        <tr class="border-b">
+            <td class="p-2">{{ atleta.nome }}</td>
+            <td>{{ atleta.cpf }}</td>
+            <td>{{ atleta.categoria }}</td>
+            <td class="flex gap-3 p-2">
+                <a href="/editar_atleta/{{ atleta.id }}" class="text-blue-600">Editar</a>
+                <a href="/remover_atleta/{{ atleta.id }}" class="text-red-600">Remover</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
