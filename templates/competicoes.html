@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-4">Competições</h1>
+
+<form method="POST" class="flex gap-2 mb-4">
+    <input name="nome" placeholder="Nome" class="border p-2 rounded-lg" required>
+    <input name="ano" placeholder="Ano" class="border p-2 rounded-lg w-24" required>
+    <input name="limite" type="number" placeholder="Limite" class="border p-2 rounded-lg w-24" required>
+
+    <button class="bg-green-600 text-white px-4 rounded-lg">
+        Adicionar
+    </button>
+</form>
+
+<ul class="space-y-2">
+{% for comp in competicoes %}
+    <li class="bg-gray-100 p-3 rounded-lg flex justify-between">
+        <span>{{ comp.nome }} - {{ comp.ano }} (Limite: {{ comp.limite }})</span>
+        <a href="/inscricoes/{{ comp.id }}" class="text-indigo-600 font-semibold">
+            Inscrições
+        </a>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}
