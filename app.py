@@ -155,4 +155,4 @@ def remover_inscricao(id):
     return redirect(url_for('inscricoes', competicao_id=comp_id))
 
 if __name__ == '__main__':
-    app.run(debug=True)v
+    app.run()
