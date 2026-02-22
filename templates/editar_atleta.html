@@ -3,14 +3,39 @@
 
 <h1 class="text-2xl font-bold mb-4">Editar Atleta</h1>
 
-<form method="POST" class="grid gap-4 max-w-md">
-    <input name="nome" value="{{ atleta.nome }}" class="border p-2 rounded-lg">
-    <input name="cpf" value="{{ atleta.cpf }}" class="border p-2 rounded-lg">
-    <input type="date" name="nascimento" value="{{ atleta.nascimento }}" class="border p-2 rounded-lg">
+<form method="POST" class="grid gap-3">
 
-    <button class="bg-indigo-600 text-white p-2 rounded-lg">
-        Salvar Alterações
-    </button>
+<input name="nome" value="{{ atleta.nome }}" class="border p-2 rounded-lg">
+<input name="cpf" value="{{ atleta.cpf }}" class="border p-2 rounded-lg">
+<input type="date" name="nascimento" value="{{ atleta.nascimento }}" class="border p-2 rounded-lg">
+
+<input name="altura" value="{{ atleta.altura }}" class="border p-2 rounded-lg">
+<input name="endereco" value="{{ atleta.endereco }}" class="border p-2 rounded-lg">
+<input name="telefone" value="{{ atleta.telefone }}" class="border p-2 rounded-lg">
+
+<input name="responsavel_nome" value="{{ atleta.responsavel_nome }}" class="border p-2 rounded-lg">
+<input name="responsavel_telefone" value="{{ atleta.responsavel_telefone }}" class="border p-2 rounded-lg">
+
+<input name="escola" value="{{ atleta.escola }}" class="border p-2 rounded-lg">
+<input name="local_treino" value="{{ atleta.local_treino }}" class="border p-2 rounded-lg">
+
+<input name="tamanho_camisa" value="{{ atleta.tamanho_camisa }}" class="border p-2 rounded-lg">
+<input name="numero_camisa" value="{{ atleta.numero_camisa }}" class="border p-2 rounded-lg">
+
+<select name="padrao_jogo" class="border p-2 rounded-lg">
+    <option value="sim" {% if atleta.padrao_jogo %}selected{% endif %}>Padrão de jogo - Sim</option>
+    <option value="nao" {% if not atleta.padrao_jogo %}selected{% endif %}>Não</option>
+</select>
+
+<select name="padrao_treino" class="border p-2 rounded-lg">
+    <option value="sim" {% if atleta.padrao_treino %}selected{% endif %}>Padrão de treino - Sim</option>
+    <option value="nao" {% if not atleta.padrao_treino %}selected{% endif %}>Não</option>
+</select>
+
+<button class="bg-indigo-600 text-white p-2 rounded-lg">
+Salvar Alterações
+</button>
+
 </form>
 
 {% endblock %}
