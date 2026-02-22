@@ -3,14 +3,39 @@
 
 <h1 class="text-2xl font-bold mb-4">Cadastrar Atleta</h1>
 
-<form method="POST" class="grid gap-4 max-w-md">
-    <input name="nome" placeholder="Nome" class="border p-2 rounded-lg" required>
-    <input name="cpf" placeholder="CPF" class="border p-2 rounded-lg" required>
-    <input type="date" name="nascimento" class="border p-2 rounded-lg" required>
+<form method="POST" class="grid gap-3">
 
-    <button class="bg-indigo-600 text-white p-2 rounded-lg">
-        Salvar
-    </button>
+<input name="nome" placeholder="Nome" class="border p-2 rounded-lg" required>
+<input name="cpf" placeholder="CPF" class="border p-2 rounded-lg" required>
+<input type="date" name="nascimento" class="border p-2 rounded-lg" required>
+
+<input name="altura" placeholder="Altura" class="border p-2 rounded-lg">
+<input name="endereco" placeholder="Endereço" class="border p-2 rounded-lg">
+<input name="telefone" placeholder="Telefone" class="border p-2 rounded-lg">
+
+<input name="responsavel_nome" placeholder="Nome do Responsável" class="border p-2 rounded-lg">
+<input name="responsavel_telefone" placeholder="Telefone do Responsável" class="border p-2 rounded-lg">
+
+<input name="escola" placeholder="Escola" class="border p-2 rounded-lg">
+<input name="local_treino" placeholder="Local de Treino" class="border p-2 rounded-lg">
+
+<input name="tamanho_camisa" placeholder="Tamanho da Camisa" class="border p-2 rounded-lg">
+<input name="numero_camisa" placeholder="Número da Camisa" class="border p-2 rounded-lg">
+
+<select name="padrao_jogo" class="border p-2 rounded-lg">
+    <option value="nao">Possui padrão de jogo? Não</option>
+    <option value="sim">Sim</option>
+</select>
+
+<select name="padrao_treino" class="border p-2 rounded-lg">
+    <option value="nao">Possui padrão de treino? Não</option>
+    <option value="sim">Sim</option>
+</select>
+
+<button class="bg-indigo-600 text-white p-2 rounded-lg">
+Salvar
+</button>
+
 </form>
 
 {% endblock %}
