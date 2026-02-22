@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-4">Editar Atleta</h1>
+
+<form method="POST" class="grid gap-4 max-w-md">
+    <input name="nome" value="{{ atleta.nome }}" class="border p-2 rounded-lg">
+    <input name="cpf" value="{{ atleta.cpf }}" class="border p-2 rounded-lg">
+    <input type="date" name="nascimento" value="{{ atleta.nascimento }}" class="border p-2 rounded-lg">
+
+    <button class="bg-indigo-600 text-white p-2 rounded-lg">
+        Salvar Alterações
+    </button>
+</form>
+
+{% endblock %}
