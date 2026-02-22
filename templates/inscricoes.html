@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-2">
+    Inscrições - {{ competicao.nome }}
+</h1>
+
+<p class="mb-4 text-sm text-gray-600">
+    Limite: {{ competicao.limite }} |
+    Vagas restantes: {{ vagas_restantes }}
+</p>
+
+{% if erro %}
+<div class="bg-red-100 text-red-700 p-2 rounded-lg mb-4">
+    {{ erro }}
+</div>
+{% endif %}
+
+<form method="POST" class="flex gap-2 mb-4">
+    <select name="atleta_id" class="border p-2 rounded-lg">
+        {% for atleta in atletas %}
+            <option value="{{ atleta.id }}">
+                {{ atleta.nome }} ({{ calcular_categoria(atleta.nascimento) }})
+            </option>
+        {% endfor %}
+    </select>
+
+    <button class="bg-indigo-600 text-white px-4 rounded-lg">
+        Inscrever
+    </button>
+</form>
+
+<h2 class="font-bold mb-2">Inscritos</h2>
+
+<ul class="space-y-2">
+{% for insc in inscritos %}
+    <li class="bg-gray-100 p-2 rounded-lg flex justify-between">
+        <span>
+            {{ insc.atleta.nome }} —
+            {{ calcular_categoria(insc.atleta.nascimento) }}
+        </span>
+        <a href="/remover_inscricao/{{ insc.id }}" class="text-red-600">
+            Remover
+        </a>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}
