@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-4">Cadastrar Atleta</h1>
+
+<form method="POST" class="grid gap-4 max-w-md">
+    <input name="nome" placeholder="Nome" class="border p-2 rounded-lg" required>
+    <input name="cpf" placeholder="CPF" class="border p-2 rounded-lg" required>
+    <input type="date" name="nascimento" class="border p-2 rounded-lg" required>
+
+    <button class="bg-indigo-600 text-white p-2 rounded-lg">
+        Salvar
+    </button>
+</form>
+
+{% endblock %}
