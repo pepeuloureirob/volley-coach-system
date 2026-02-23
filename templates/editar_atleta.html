@@ -1,94 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2 class="text-3xl font-bold mb-6">Editar Atleta</h2>
+<h2>Editar Atleta</h2>
 
-<form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<form method="POST">
+    <input name="nome" value="{{ atleta.nome }}" required>
+    <input name="telefone" value="{{ atleta.telefone }}">
+    <input name="altura" value="{{ atleta.altura }}">
+    <input name="endereco" value="{{ atleta.endereco }}">
 
-    <input name="nome"
-           value="{{ atleta.nome }}"
-           class="p-3 border rounded-xl"
-           placeholder="Nome">
+    <input name="responsavel_nome" value="{{ atleta.responsavel_nome }}">
+    <input name="responsavel_telefone" value="{{ atleta.responsavel_telefone }}">
 
-    <input name="cpf"
-           value="{{ atleta.cpf }}"
-           class="p-3 border rounded-xl"
-           placeholder="CPF">
+    <input name="escola" value="{{ atleta.escola }}">
+    <input name="local_treino" value="{{ atleta.local_treino }}">
 
-    <input type="date"
-           name="nascimento"
-           value="{{ atleta.nascimento }}"
-           class="p-3 border rounded-xl">
+    <input name="tamanho_camisa" value="{{ atleta.tamanho_camisa }}">
+    <input name="numero_camisa" value="{{ atleta.numero_camisa }}">
 
-    <input name="altura"
-           value="{{ atleta.altura }}"
-           class="p-3 border rounded-xl"
-           placeholder="Altura">
-
-    <input name="telefone"
-           value="{{ atleta.telefone }}"
-           class="p-3 border rounded-xl"
-           placeholder="Telefone">
-
-    <input name="numero_camisa"
-           value="{{ atleta.numero_camisa }}"
-           class="p-3 border rounded-xl"
-           placeholder="Número da Camisa">
-
-    <input name="endereco"
-           value="{{ atleta.endereco }}"
-           class="p-3 border rounded-xl md:col-span-2"
-           placeholder="Endereço">
-
-    <input name="responsavel"
-           value="{{ atleta.responsavel }}"
-           class="p-3 border rounded-xl"
-           placeholder="Nome do Responsável">
-
-    <input name="telefone_responsavel"
-           value="{{ atleta.telefone_responsavel }}"
-           class="p-3 border rounded-xl"
-           placeholder="Telefone do Responsável">
-
-    <input name="escola"
-           value="{{ atleta.escola }}"
-           class="p-3 border rounded-xl"
-           placeholder="Escola">
-
-    <input name="local_treino"
-           value="{{ atleta.local_treino }}"
-           class="p-3 border rounded-xl"
-           placeholder="Local de Treino">
-
-    <input name="tamanho_camisa"
-           value="{{ atleta.tamanho_camisa }}"
-           class="p-3 border rounded-xl"
-           placeholder="Tamanho da Camisa">
-
-    <!-- Padrão de jogo -->
-    <select name="padrao_jogo" class="p-3 border rounded-xl">
-        <option value="sim" {% if atleta.padrao_jogo %}selected{% endif %}>
-            Possui padrão de jogo? — Sim
-        </option>
-        <option value="nao" {% if not atleta.padrao_jogo %}selected{% endif %}>
-            Não
-        </option>
+    <select name="padrao_jogo">
+        <option value="sim" {% if atleta.possui_padrao_jogo %}selected{% endif %}>Possui padrão jogo - Sim</option>
+        <option value="nao" {% if not atleta.possui_padrao_jogo %}selected{% endif %}>Não</option>
     </select>
 
-    <!-- Padrão de treino -->
-    <select name="padrao_treino" class="p-3 border rounded-xl">
-        <option value="sim" {% if atleta.padrao_treino %}selected{% endif %}>
-            Possui padrão de treino? — Sim
-        </option>
-        <option value="nao" {% if not atleta.padrao_treino %}selected{% endif %}>
-            Não
-        </option>
+    <select name="padrao_treino">
+        <option value="sim" {% if atleta.possui_padrao_treino %}selected{% endif %}>Possui padrão treino - Sim</option>
+        <option value="nao" {% if not atleta.possui_padrao_treino %}selected{% endif %}>Não</option>
     </select>
 
-    <button class="bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-xl md:col-span-2">
-        Salvar Alterações
-    </button>
-
+    <button type="submit">Salvar Alterações</button>
 </form>
 
 {% endblock %}
