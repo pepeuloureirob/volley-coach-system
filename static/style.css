@@ -177,3 +177,74 @@ button:hover {
 .btn-excluir:hover {
     background: rgba(239, 68, 68, 0.3);
 }
+
+/* ===== FLOATING ACTION BUTTONS (FAB) ===== */
+
+.floating-buttons {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 999;
+}
+
+.fab {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    color: #020617;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+    transition: 0.25s ease;
+    position: relative;
+    animation: fabEntrance 0.4s ease;
+}
+
+.fab:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 14px 35px rgba(0,0,0,0.6);
+}
+
+/* Tooltip */
+
+.fab::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 70px;
+    background: rgba(15, 23, 42, 0.95);
+    color: #e2e8f0;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: 0.2s;
+    pointer-events: none;
+}
+
+.fab:hover::after {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animação de entrada */
+
+@keyframes fabEntrance {
+    from {
+        opacity: 0;
+        transform: scale(0.7) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
