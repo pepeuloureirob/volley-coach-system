@@ -4,31 +4,13 @@
 <h2>Editar Atleta</h2>
 
 <form method="POST">
-    <input name="nome" value="{{ atleta.nome }}" required>
+    <input name="nome" value="{{ atleta.nome }}">
     <input name="telefone" value="{{ atleta.telefone }}">
     <input name="altura" value="{{ atleta.altura }}">
     <input name="endereco" value="{{ atleta.endereco }}">
-
-    <input name="responsavel_nome" value="{{ atleta.responsavel_nome }}">
-    <input name="responsavel_telefone" value="{{ atleta.responsavel_telefone }}">
-
-    <input name="escola" value="{{ atleta.escola }}">
-    <input name="local_treino" value="{{ atleta.local_treino }}">
-
-    <input name="tamanho_camisa" value="{{ atleta.tamanho_camisa }}">
     <input name="numero_camisa" value="{{ atleta.numero_camisa }}">
 
-    <select name="padrao_jogo">
-        <option value="sim" {% if atleta.possui_padrao_jogo %}selected{% endif %}>Possui padrão jogo - Sim</option>
-        <option value="nao" {% if not atleta.possui_padrao_jogo %}selected{% endif %}>Não</option>
-    </select>
-
-    <select name="padrao_treino">
-        <option value="sim" {% if atleta.possui_padrao_treino %}selected{% endif %}>Possui padrão treino - Sim</option>
-        <option value="nao" {% if not atleta.possui_padrao_treino %}selected{% endif %}>Não</option>
-    </select>
-
-    <button type="submit">Salvar Alterações</button>
+    <button type="submit">Salvar</button>
 </form>
 
 {% endblock %}
