@@ -152,5 +152,41 @@ def inscrever(atleta_id, competicao_id):
     db.session.commit()
     return redirect(url_for('index'))
 
+@app.route('/inscricoes', methods=['GET', 'POST'])
+def inscricoes():
+    atletas = Atleta.query.all()
+    competicoes = Competicao.query.all()
+
+    if request.method == 'POST':
+        atleta_id = request.form.get('atleta_id')
+        competicao_id = request.form.get('competicao_id')
+
+        atleta = Atleta.query.get(atleta_id)
+        competicao = Competicao.query.get(competicao_id)
+
+        if not atleta or not competicao:
+            flash('Erro ao inscrever atleta.')
+            return redirect('/inscricoes')
+
+        if len(competicao.inscritos) >= competicao.limite_atletas:
+            flash('Limite de atletas atingido!')
+            return redirect('/inscricoes')
+
+        if atleta in competicao.inscritos:
+            flash('Atleta já inscrito nessa competição.')
+            return redirect('/inscricoes')
+
+        competicao.inscritos.append(atleta)
+        db.session.commit()
+
+        flash('Atleta inscrito com sucesso!')
+        return redirect('/inscricoes')
+
+    return render_template(
+        'inscricoes.html',
+        atletas=atletas,
+        competicoes=competicoes
+    )
+
 if __name__ == '__main__':
     app.run(debug=True)
