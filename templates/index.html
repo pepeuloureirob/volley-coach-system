@@ -11,12 +11,18 @@
     <h1>Sistema do Professor</h1>
 </header>
 
+<!-- BOTÕES FLUTUANTES -->
+<div class="floating-buttons">
+    <a href="#novo-atleta" class="float-btn">+ Atleta</a>
+    <a href="#nova-competicao" class="float-btn">+ Competição</a>
+</div>
+
 <main>
 
 <section class="painel">
 
     <!-- NOVO ATLETA -->
-    <div class="box">
+    <div class="box" id="novo-atleta">
         <h2>Novo Atleta</h2>
         <form method="POST" action="/novo_atleta">
             <input name="nome" placeholder="Nome" required>
@@ -28,7 +34,7 @@
     </div>
 
     <!-- NOVA COMPETIÇÃO -->
-    <div class="box">
+    <div class="box" id="nova-competicao">
         <h2>Nova Competição</h2>
         <form method="POST" action="/nova_competicao">
             <input name="nome" placeholder="Nome" required>
