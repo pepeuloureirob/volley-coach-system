@@ -1,35 +1,60 @@
-@app.route('/cadastrar_atleta', methods=['GET', 'POST'])
-def cadastrar_atleta():
-    if request.method == 'POST':
-        try:
-            nascimento = datetime.strptime(
-                request.form.get('nascimento'), '%Y-%m-%d'
-            ).date()
+{% extends "base.html" %}
+{% block content %}
 
-            atleta = Atleta(
-                nome=request.form.get('nome'),
-                cpf=request.form.get('cpf'),
-                nascimento=nascimento,
-                categoria=request.form.get('categoria'),
-                altura=float(request.form.get('altura')) if request.form.get('altura') else None,
-                endereco=request.form.get('endereco'),
-                telefone=request.form.get('telefone'),
-                responsavel=request.form.get('responsavel'),
-                telefone_responsavel=request.form.get('telefone_responsavel'),
-                escola=request.form.get('escola'),
-                local_treino=request.form.get('local_treino'),
-                tamanho_camisa=request.form.get('tamanho_camisa'),
-                numero_camisa=int(request.form.get('numero_camisa')) if request.form.get('numero_camisa') else None,
-                padrao_jogo=True if request.form.get('padrao_jogo') == 'sim' else False,
-                padrao_treino=True if request.form.get('padrao_treino') == 'sim' else False
-            )
+<div class="bg-white shadow-lg rounded-2xl p-6 max-w-2xl">
 
-            db.session.add(atleta)
-            db.session.commit()
+<h1 class="text-2xl font-bold mb-4">Cadastrar Atleta</h1>
 
-            return redirect(url_for('atletas'))
+<form method="POST" class="grid grid-cols-2 gap-3">
 
-        except Exception as e:
-            return f"Erro ao salvar atleta: {str(e)}"
+    <input name="nome" placeholder="Nome" class="border p-2 rounded-lg" required>
+    <input name="cpf" placeholder="CPF" class="border p-2 rounded-lg" required>
 
-    return render_template('cadastrar_atleta.html')
+    <input type="date" name="nascimento" class="border p-2 rounded-lg" required>
+
+    <select name="categoria" class="border p-2 rounded-lg">
+        <option>Sub 13</option>
+        <option>Sub 15</option>
+        <option>Sub 17</option>
+        <option>Sub 18</option>
+        <option>Sub 19</option>
+        <option>Sub 20</option>
+        <option>Sub 21</option>
+        <option>Sub 23</option>
+        <option>Adulto</option>
+    </select>
+
+    <input name="altura" placeholder="Altura (ex: 1.75)" class="border p-2 rounded-lg">
+    <input name="telefone" placeholder="Telefone" class="border p-2 rounded-lg">
+
+    <input name="endereco" placeholder="Endereço" class="border p-2 rounded-lg col-span-2">
+
+    <input name="responsavel" placeholder="Responsável" class="border p-2 rounded-lg">
+    <input name="telefone_responsavel" placeholder="Telefone Responsável" class="border p-2 rounded-lg">
+
+    <input name="escola" placeholder="Escola" class="border p-2 rounded-lg">
+    <input name="local_treino" placeholder="Local de Treino" class="border p-2 rounded-lg">
+
+    <input name="tamanho_camisa" placeholder="Tamanho Camisa" class="border p-2 rounded-lg">
+    <input name="numero_camisa" placeholder="Número Camisa" class="border p-2 rounded-lg">
+
+    <label>Possui padrão de jogo?</label>
+    <select name="padrao_jogo" class="border p-2 rounded-lg">
+        <option value="sim">Sim</option>
+        <option value="nao">Não</option>
+    </select>
+
+    <label>Possui padrão de treino?</label>
+    <select name="padrao_treino" class="border p-2 rounded-lg">
+        <option value="sim">Sim</option>
+        <option value="nao">Não</option>
+    </select>
+
+    <button class="bg-indigo-600 text-white p-2 rounded-lg col-span-2">
+        Salvar
+    </button>
+
+</form>
+</div>
+
+{% endblock %}
