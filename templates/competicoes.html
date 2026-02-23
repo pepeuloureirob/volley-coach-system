@@ -1,35 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<div class="flex justify-between mb-6">
-    <h2 class="text-3xl font-bold">Competições</h2>
-
-    <a href="/cadastrar_competicao"
-       class="bg-indigo-600 text-white px-4 py-2 rounded-xl">
-        + Nova Competição
-    </a>
-</div>
-
-<div class="bg-white rounded-2xl shadow">
-<table class="w-full">
-<thead class="bg-gray-200">
-<tr>
-<th class="p-3 text-left">Nome</th>
-<th>Ano</th>
-<th>Limite</th>
-</tr>
-</thead>
-
-<tbody>
+<h1>Competições</h1>
+<a class="btn" href="/nova_competicao">Nova Competição</a>
+<ul>
 {% for c in competicoes %}
-<tr class="border-b hover:bg-gray-50">
-<td class="p-3">{{ c.nome }}</td>
-<td>{{ c.ano }}</td>
-<td>{{ c.limite }}</td>
-</tr>
+<li>{{ c.nome }} ({{ c.limite_atletas }})</li>
 {% endfor %}
-</tbody>
-</table>
-</div>
-
+</ul>
 {% endblock %}
