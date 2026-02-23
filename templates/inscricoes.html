@@ -1,26 +1,23 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block content %}
 
-<h2 class="text-3xl font-bold mb-6">Inscrições</h2>
+<h1 class="text-2xl font-bold mb-4">Inscrições</h1>
 
-<form method="POST" class="bg-white p-6 rounded-2xl shadow flex gap-4">
-
-<select name="atleta_id" class="p-3 border rounded-xl flex-1">
-{% for a in atletas %}
-<option value="{{ a.id }}">{{ a.nome }}</option>
+<table class="w-full bg-white shadow rounded-lg">
+<thead class="bg-gray-200">
+<tr>
+    <th class="p-2">Atleta</th>
+    <th>Competição</th>
+</tr>
+</thead>
+<tbody>
+{% for i in inscricoes %}
+<tr class="border-b">
+    <td class="p-2">{{ i.atleta.nome }}</td>
+    <td>{{ i.competicao.nome }}</td>
+</tr>
 {% endfor %}
-</select>
-
-<select name="competicao_id" class="p-3 border rounded-xl flex-1">
-{% for c in competicoes %}
-<option value="{{ c.id }}">{{ c.nome }}</option>
-{% endfor %}
-</select>
-
-<button class="bg-indigo-600 text-white px-6 rounded-xl">
-Inscrever
-</button>
-
-</form>
+</tbody>
+</table>
 
 {% endblock %}
