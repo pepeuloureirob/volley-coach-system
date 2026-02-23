@@ -8,7 +8,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-# ------------------ MODELS ------------------
+# ---------------- MODELS ----------------
 
 class Atleta(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -45,8 +45,7 @@ class Inscricao(db.Model):
     atleta = db.relationship('Atleta')
     competicao = db.relationship('Competicao')
 
-
-# ------------------ HELPERS ------------------
+# ---------------- HELPERS ----------------
 
 def calcular_idade(nascimento):
     hoje = date.today()
@@ -61,35 +60,28 @@ def definir_categoria(idade):
             return f"Sub {cat}"
     return "Adulto"
 
-
-# ------------------ ROUTES ------------------
+# ---------------- ROUTES ----------------
 
 @app.route('/')
 def index():
     return render_template('index.html')
-
-
-# -------- ATLETAS --------
 
 @app.route('/atletas')
 def atletas():
     lista = Atleta.query.all()
     return render_template('atletas.html', atletas=lista)
 
-
 @app.route('/cadastrar_atleta', methods=['GET', 'POST'])
 def cadastrar_atleta():
     if request.method == 'POST':
         nascimento = datetime.strptime(request.form['nascimento'], '%Y-%m-%d').date()
         idade = calcular_idade(nascimento)
-        categoria = definir_categoria(idade)
 
         atleta = Atleta(
             nome=request.form['nome'],
             cpf=request.form['cpf'],
             nascimento=nascimento,
-            categoria=categoria,
-
+            categoria=definir_categoria(idade),
             altura=float(request.form['altura']),
             endereco=request.form['endereco'],
             telefone=request.form['telefone'],
@@ -98,8 +90,8 @@ def cadastrar_atleta():
             escola=request.form['escola'],
             local_treino=request.form['local_treino'],
             tamanho_camisa=request.form['tamanho_camisa'],
-            padrao_jogo=True if request.form['padrao_jogo'] == 'sim' else False,
-            padrao_treino=True if request.form['padrao_treino'] == 'sim' else False,
+            padrao_jogo=request.form['padrao_jogo'] == 'sim',
+            padrao_treino=request.form['padrao_treino'] == 'sim',
             numero_camisa=int(request.form['numero_camisa'])
         )
 
@@ -108,7 +100,6 @@ def cadastrar_atleta():
         return redirect(url_for('atletas'))
 
     return render_template('cadastrar_atleta.html')
-
 
 @app.route('/editar_atleta/<int:id>', methods=['GET', 'POST'])
 def editar_atleta(id):
@@ -122,7 +113,6 @@ def editar_atleta(id):
         atleta.cpf = request.form['cpf']
         atleta.nascimento = nascimento
         atleta.categoria = definir_categoria(idade)
-
         atleta.altura = float(request.form['altura'])
         atleta.endereco = request.form['endereco']
         atleta.telefone = request.form['telefone']
@@ -131,15 +121,14 @@ def editar_atleta(id):
         atleta.escola = request.form['escola']
         atleta.local_treino = request.form['local_treino']
         atleta.tamanho_camisa = request.form['tamanho_camisa']
-        atleta.padrao_jogo = True if request.form['padrao_jogo'] == 'sim' else False
-        atleta.padrao_treino = True if request.form['padrao_treino'] == 'sim' else False
+        atleta.padrao_jogo = request.form['padrao_jogo'] == 'sim'
+        atleta.padrao_treino = request.form['padrao_treino'] == 'sim'
         atleta.numero_camisa = int(request.form['numero_camisa'])
 
         db.session.commit()
         return redirect(url_for('atletas'))
 
     return render_template('editar_atleta.html', atleta=atleta)
-
 
 @app.route('/remover_atleta/<int:id>')
 def remover_atleta(id):
@@ -148,14 +137,10 @@ def remover_atleta(id):
     db.session.commit()
     return redirect(url_for('atletas'))
 
-
-# -------- COMPETIÇÕES --------
-
 @app.route('/competicoes')
 def competicoes():
     lista = Competicao.query.all()
     return render_template('competicoes.html', competicoes=lista)
-
 
 @app.route('/cadastrar_competicao', methods=['GET', 'POST'])
 def cadastrar_competicao():
@@ -171,9 +156,6 @@ def cadastrar_competicao():
 
     return render_template('cadastrar_competicao.html')
 
-
-# -------- INSCRIÇÕES --------
-
 @app.route('/inscricoes', methods=['GET', 'POST'])
 def inscricoes():
     atletas = Atleta.query.all()
@@ -188,30 +170,20 @@ def inscricoes():
         total = Inscricao.query.filter_by(competicao_id=competicao_id).count()
 
         if total >= competicao.limite:
-            return "Limite de atletas atingido nessa competição."
+            return "Limite de atletas atingido."
 
-        inscricao = Inscricao(
-            atleta_id=atleta_id,
-            competicao_id=competicao_id
-        )
-
+        inscricao = Inscricao(atleta_id=atleta_id, competicao_id=competicao_id)
         db.session.add(inscricao)
         db.session.commit()
         return redirect(url_for('inscricoes'))
 
-    return render_template(
-        'inscricoes.html',
-        atletas=atletas,
-        competicoes=competicoes,
-        inscricoes=inscricoes
-    )
-
-
-# ------------------ INIT DB ------------------
+    return render_template('inscricoes.html',
+                           atletas=atletas,
+                           competicoes=competicoes,
+                           inscricoes=inscricoes)
 
 with app.app_context():
     db.create_all()
-
 
 if __name__ == '__main__':
     app.run()
