@@ -11,39 +11,12 @@
     <h1>Sistema do Professor</h1>
     <nav>
         <a href="{{ url_for('index') }}">Dashboard</a>
-        <a href="#novo-atleta">Novo Atleta</a>
-        <a href="#nova-competicao">Nova Competição</a>
+        <a href="{{ url_for('tela_atleta') }}">Novo Atleta</a>
+        <a href="{{ url_for('tela_competicao') }}">Nova Competição</a>
     </nav>
 </header>
 
 <main class="container">
-
-    <!-- ================= NOVO ATLETA ================= -->
-    <section id="novo-atleta" class="card">
-        <h2>Novo Atleta</h2>
-
-        <form action="{{ url_for('salvar_atleta') }}" method="POST">
-            <input type="text" name="nome" placeholder="Nome" required>
-            <input type="text" name="cpf" placeholder="CPF" required>
-            <input type="date" name="nascimento" required>
-            <input type="text" name="categoria" placeholder="Categoria" required>
-
-            <button type="submit">Salvar</button>
-        </form>
-    </section>
-
-    <!-- ================= NOVA COMPETIÇÃO ================= -->
-    <section id="nova-competicao" class="card">
-        <h2>Nova Competição</h2>
-
-        <form action="{{ url_for('nova_competicao') }}" method="POST">
-            <input type="text" name="nome" placeholder="Nome" required>
-            <input type="number" name="ano" placeholder="Ano" required>
-            <input type="number" name="limite" placeholder="Limite" required>
-
-            <button type="submit">Criar</button>
-        </form>
-    </section>
 
     <!-- ================= ATLETAS ================= -->
     <section class="list-section">
@@ -113,12 +86,12 @@
 
 <!-- ================= FLOATING BUTTONS ================= -->
 <div class="floating-buttons">
-    <a href="#novo-atleta" class="fab" data-tooltip="Adicionar atleta">
-        +
+    <a href="{{ url_for('tela_atleta') }}" class="fab" title="Adicionar atleta">
+        👤
     </a>
 
-    <a href="#nova-competicao" class="fab" data-tooltip="Adicionar competição">
-        +
+    <a href="{{ url_for('tela_competicao') }}" class="fab" title="Adicionar competição">
+        🏆
     </a>
 </div>
 
