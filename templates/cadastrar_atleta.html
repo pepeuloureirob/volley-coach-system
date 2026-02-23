@@ -1,27 +1,60 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Cadastrar Atleta</h1>
-<form method="POST">
-<input name="nome" placeholder="Nome">
-<input name="cpf" placeholder="CPF">
-<input type="date" name="nascimento">
-<input name="altura" placeholder="Altura">
-<input name="endereco" placeholder="Endereço">
-<input name="telefone" placeholder="Telefone">
-<input name="responsavel" placeholder="Responsável">
-<input name="telefone_responsavel" placeholder="Telefone Responsável">
-<input name="escola" placeholder="Escola">
-<input name="local_treino" placeholder="Local de Treino">
-<input name="tamanho_camisa" placeholder="Tamanho Camisa">
-<select name="padrao_jogo">
-<option value="sim">Padrão de Jogo - Sim</option>
-<option value="nao">Não</option>
+
+<h2 class="text-3xl font-bold mb-6">Cadastrar Atleta</h2>
+
+<form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+<input name="nome" placeholder="Nome"
+       class="p-3 border rounded-xl">
+
+<input name="cpf" placeholder="CPF"
+       class="p-3 border rounded-xl">
+
+<input type="date" name="nascimento"
+       class="p-3 border rounded-xl">
+
+<input name="altura" placeholder="Altura"
+       class="p-3 border rounded-xl">
+
+<input name="telefone" placeholder="Telefone"
+       class="p-3 border rounded-xl">
+
+<input name="numero_camisa" placeholder="Número Camisa"
+       class="p-3 border rounded-xl">
+
+<input name="endereco" placeholder="Endereço"
+       class="p-3 border rounded-xl md:col-span-2">
+
+<input name="responsavel" placeholder="Responsável"
+       class="p-3 border rounded-xl">
+
+<input name="telefone_responsavel" placeholder="Telefone Responsável"
+       class="p-3 border rounded-xl">
+
+<input name="escola" placeholder="Escola"
+       class="p-3 border rounded-xl">
+
+<input name="local_treino" placeholder="Local Treino"
+       class="p-3 border rounded-xl">
+
+<input name="tamanho_camisa" placeholder="Tamanho Camisa"
+       class="p-3 border rounded-xl">
+
+<select name="padrao_jogo" class="p-3 border rounded-xl">
+    <option value="sim">Padrão de jogo — Sim</option>
+    <option value="nao">Não</option>
 </select>
-<select name="padrao_treino">
-<option value="sim">Padrão de Treino - Sim</option>
-<option value="nao">Não</option>
+
+<select name="padrao_treino" class="p-3 border rounded-xl">
+    <option value="sim">Padrão de treino — Sim</option>
+    <option value="nao">Não</option>
 </select>
-<input name="numero_camisa" placeholder="Número Camisa">
-<button>Salvar</button>
+
+<button class="bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-xl md:col-span-2">
+    Salvar Atleta
+</button>
+
 </form>
+
 {% endblock %}
