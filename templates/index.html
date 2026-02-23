@@ -1,30 +1,26 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
 {% block content %}
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<h2>Atletas</h2>
+<div class="grid">
+{% for atleta in atletas %}
+<div class="card">
+    <h3>{{ atleta.nome }}</h3>
+    <p>{{ atleta.categoria }}</p>
+    <a href="/editar_atleta/{{ atleta.id }}">Editar</a>
+    <a href="/remover_atleta/{{ atleta.id }}">Remover</a>
+</div>
+{% endfor %}
+</div>
 
-    <div class="bg-white shadow-lg rounded-2xl p-6">
-        <h2 class="text-gray-500 text-sm">Atletas</h2>
-        <p class="text-3xl font-bold text-indigo-600">
-            {{ total_atletas }}
-        </p>
-    </div>
-
-    <div class="bg-white shadow-lg rounded-2xl p-6">
-        <h2 class="text-gray-500 text-sm">Competições</h2>
-        <p class="text-3xl font-bold text-indigo-600">
-            {{ total_competicoes }}
-        </p>
-    </div>
-
-    <div class="bg-white shadow-lg rounded-2xl p-6">
-        <h2 class="text-gray-500 text-sm">Inscrições</h2>
-        <p class="text-3xl font-bold text-indigo-600">
-            {{ total_inscricoes }}
-        </p>
-    </div>
-
+<h2>Competições</h2>
+<div class="grid">
+{% for comp in competicoes %}
+<div class="card">
+    <h3>{{ comp.nome }} ({{ comp.ano }})</h3>
+    <p>{{ comp.inscricoes.count() }} / {{ comp.limite_atletas }}</p>
+</div>
+{% endfor %}
 </div>
 
 {% endblock %}
