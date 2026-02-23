@@ -1,26 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2>Atletas</h2>
-<div class="grid">
-{% for atleta in atletas %}
-<div class="card">
-    <h3>{{ atleta.nome }}</h3>
-    <p>{{ atleta.categoria }}</p>
-    <a href="/editar_atleta/{{ atleta.id }}">Editar</a>
-    <a href="/remover_atleta/{{ atleta.id }}">Remover</a>
-</div>
-{% endfor %}
-</div>
+<div class="dashboard">
 
-<h2>Competições</h2>
-<div class="grid">
-{% for comp in competicoes %}
-<div class="card">
-    <h3>{{ comp.nome }} ({{ comp.ano }})</h3>
-    <p>{{ comp.inscricoes.count() }} / {{ comp.limite_atletas }}</p>
-</div>
-{% endfor %}
+    <h1>Painel do Professor</h1>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total de Atletas</h3>
+            <p>{{ total_atletas }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Competições</h3>
+            <p>{{ total_competicoes }}</p>
+        </div>
+
+    </div>
+
+    <div class="actions">
+        <a href="/cadastrar_atleta" class="btn">Cadastrar Atleta</a>
+        <a href="/nova_competicao" class="btn">Nova Competição</a>
+        <a href="/inscricoes" class="btn secondary">Inscrições</a>
+    </div>
+
 </div>
 
 {% endblock %}
