@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sistema Vôlei</title>
+    <title>Sistema Esportivo</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
-        <h1>Sistema do Professor</h1>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/cadastrar_atleta">Novo Atleta</a>
-            <a href="/nova_competicao">Nova Competição</a>
-        </nav>
-    </header>
+    <nav>
+        <a href="/">Dashboard</a>
+        <a href="/atletas">Atletas</a>
+        <a href="/competicoes">Competições</a>
+        <a href="/inscricoes">Inscrições</a>
+    </nav>
 
-    <main>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash">
+                {% for msg in messages %}
+                    <p>{{ msg }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="container">
         {% block content %}{% endblock %}
-    </main>
+    </div>
 </body>
 </html>
