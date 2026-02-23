@@ -1,60 +1,35 @@
-{% extends 'base.html' %}
-{% block content %}
+@app.route('/cadastrar_atleta', methods=['GET', 'POST'])
+def cadastrar_atleta():
+    if request.method == 'POST':
+        try:
+            nascimento = datetime.strptime(
+                request.form.get('nascimento'), '%Y-%m-%d'
+            ).date()
 
-<h2 class="text-3xl font-bold mb-6">Cadastrar Atleta</h2>
+            atleta = Atleta(
+                nome=request.form.get('nome'),
+                cpf=request.form.get('cpf'),
+                nascimento=nascimento,
+                categoria=request.form.get('categoria'),
+                altura=float(request.form.get('altura')) if request.form.get('altura') else None,
+                endereco=request.form.get('endereco'),
+                telefone=request.form.get('telefone'),
+                responsavel=request.form.get('responsavel'),
+                telefone_responsavel=request.form.get('telefone_responsavel'),
+                escola=request.form.get('escola'),
+                local_treino=request.form.get('local_treino'),
+                tamanho_camisa=request.form.get('tamanho_camisa'),
+                numero_camisa=int(request.form.get('numero_camisa')) if request.form.get('numero_camisa') else None,
+                padrao_jogo=True if request.form.get('padrao_jogo') == 'sim' else False,
+                padrao_treino=True if request.form.get('padrao_treino') == 'sim' else False
+            )
 
-<form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            db.session.add(atleta)
+            db.session.commit()
 
-<input name="nome" placeholder="Nome"
-       class="p-3 border rounded-xl">
+            return redirect(url_for('atletas'))
 
-<input name="cpf" placeholder="CPF"
-       class="p-3 border rounded-xl">
+        except Exception as e:
+            return f"Erro ao salvar atleta: {str(e)}"
 
-<input type="date" name="nascimento"
-       class="p-3 border rounded-xl">
-
-<input name="altura" placeholder="Altura"
-       class="p-3 border rounded-xl">
-
-<input name="telefone" placeholder="Telefone"
-       class="p-3 border rounded-xl">
-
-<input name="numero_camisa" placeholder="Número Camisa"
-       class="p-3 border rounded-xl">
-
-<input name="endereco" placeholder="Endereço"
-       class="p-3 border rounded-xl md:col-span-2">
-
-<input name="responsavel" placeholder="Responsável"
-       class="p-3 border rounded-xl">
-
-<input name="telefone_responsavel" placeholder="Telefone Responsável"
-       class="p-3 border rounded-xl">
-
-<input name="escola" placeholder="Escola"
-       class="p-3 border rounded-xl">
-
-<input name="local_treino" placeholder="Local Treino"
-       class="p-3 border rounded-xl">
-
-<input name="tamanho_camisa" placeholder="Tamanho Camisa"
-       class="p-3 border rounded-xl">
-
-<select name="padrao_jogo" class="p-3 border rounded-xl">
-    <option value="sim">Padrão de jogo — Sim</option>
-    <option value="nao">Não</option>
-</select>
-
-<select name="padrao_treino" class="p-3 border rounded-xl">
-    <option value="sim">Padrão de treino — Sim</option>
-    <option value="nao">Não</option>
-</select>
-
-<button class="bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-xl md:col-span-2">
-    Salvar Atleta
-</button>
-
-</form>
-
-{% endblock %}
+    return render_template('cadastrar_atleta.html')
