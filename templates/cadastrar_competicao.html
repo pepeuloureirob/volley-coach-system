@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="bg-white shadow-lg rounded-2xl p-6 max-w-xl">
+
+    <h1 class="text-2xl font-bold mb-4">Nova Competição</h1>
+
+    <form method="POST" class="space-y-3">
+
+        <input 
+            type="text" 
+            name="nome" 
+            placeholder="Nome da competição"
+            class="w-full border p-2 rounded-lg"
+            required
+        >
+
+        <input 
+            type="number" 
+            name="ano" 
+            placeholder="Ano"
+            class="w-full border p-2 rounded-lg"
+            required
+        >
+
+        <input 
+            type="number" 
+            name="limite" 
+            placeholder="Limite de atletas"
+            class="w-full border p-2 rounded-lg"
+            required
+        >
+
+        <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg w-full">
+            Salvar Competição
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}
