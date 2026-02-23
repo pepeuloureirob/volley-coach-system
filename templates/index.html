@@ -15,7 +15,7 @@
     <div class="inscricao">
         {% for comp in competicoes %}
             <a href="/inscrever/{{ atleta.id }}/{{ comp.id }}">
-                Inscrever em {{ comp.nome }}
+                + {{ comp.nome }}
             </a>
         {% endfor %}
     </div>
