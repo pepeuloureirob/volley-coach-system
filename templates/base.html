@@ -1,17 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
+    <meta charset="UTF-8">
     <title>Sistema de Vôlei</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<nav>
-    <a href="/">Home</a>
-    <a href="/atletas">Atletas</a>
-    <a href="/competicoes">Competições</a>
-    <a href="/inscricoes">Inscrições</a>
-</nav>
-<hr>
-{% block content %}{% endblock %}
+
+<body class="bg-gray-100">
+
+<div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-indigo-700 text-white p-6">
+        <h1 class="text-2xl font-bold mb-8">🏐 Volley System</h1>
+
+        <nav class="flex flex-col gap-3">
+            <a href="/" class="hover:bg-indigo-600 p-2 rounded">Dashboard</a>
+            <a href="/atletas" class="hover:bg-indigo-600 p-2 rounded">Atletas</a>
+            <a href="/competicoes" class="hover:bg-indigo-600 p-2 rounded">Competições</a>
+            <a href="/inscricoes" class="hover:bg-indigo-600 p-2 rounded">Inscrições</a>
+        </nav>
+    </aside>
+
+    <!-- Conteúdo -->
+    <main class="flex-1 p-10">
+        {% block content %}{% endblock %}
+    </main>
+
+</div>
+
 </body>
 </html>
