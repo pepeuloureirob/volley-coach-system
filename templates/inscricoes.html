@@ -1,47 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<h2>Inscrição em Competições</h2>
-
-<form method="POST" class="form-box">
-
-    <label>Atleta</label>
-    <select name="atleta_id" required>
-        {% for atleta in atletas %}
-            <option value="{{ atleta.id }}">{{ atleta.nome }}</option>
-        {% endfor %}
-    </select>
-
-    <label>Competição</label>
-    <select name="competicao_id" required>
-        {% for comp in competicoes %}
-            <option value="{{ comp.id }}">
-                {{ comp.nome }} ({{ comp.ano }}) — {{ comp.inscritos|length }}/{{ comp.limite_atletas }}
-            </option>
-        {% endfor %}
-    </select>
-
-    <button type="submit" class="btn">Inscrever</button>
-
-</form>
-
-<hr>
-
-<h3>Inscritos</h3>
-
-{% for comp in competicoes %}
-    <div class="competition-box">
-        <h4>{{ comp.nome }} ({{ comp.ano }})</h4>
-        <p>Limite: {{ comp.limite_atletas }}</p>
-
-        <ul>
-            {% for atleta in comp.inscritos %}
-                <li>{{ atleta.nome }}</li>
-            {% else %}
-                <li>Nenhum atleta inscrito</li>
-            {% endfor %}
-        </ul>
-    </div>
+<h1>Inscrições</h1>
+<form method="post">
+<select name="atleta_id">
+{% for a in atletas %}
+<option value="{{ a.id }}">{{ a.nome }}</option>
 {% endfor %}
+</select>
 
+<select name="competicao_id">
+{% for c in competicoes %}
+<option value="{{ c.id }}">{{ c.nome }}</option>
+{% endfor %}
+</select>
+
+<button>Inscrever</button>
+</form>
 {% endblock %}
