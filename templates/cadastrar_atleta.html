@@ -1,60 +1,35 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block content %}
 
-<div class="bg-white shadow-lg rounded-2xl p-6 max-w-2xl">
+<form method="POST">
+    <input name="nome" placeholder="Nome" required>
+    <input name="cpf" placeholder="CPF" required>
+    <input type="date" name="nascimento" required>
 
-<h1 class="text-2xl font-bold mb-4">Cadastrar Atleta</h1>
+    <input name="altura" placeholder="Altura">
+    <input name="endereco" placeholder="Endereço">
+    <input name="telefone" placeholder="Telefone">
 
-<form method="POST" class="grid grid-cols-2 gap-3">
+    <input name="responsavel_nome" placeholder="Responsável">
+    <input name="responsavel_telefone" placeholder="Telefone Responsável">
 
-    <input name="nome" placeholder="Nome" class="border p-2 rounded-lg" required>
-    <input name="cpf" placeholder="CPF" class="border p-2 rounded-lg" required>
+    <input name="escola" placeholder="Escola">
+    <input name="local_treino" placeholder="Local Treino">
 
-    <input type="date" name="nascimento" class="border p-2 rounded-lg" required>
+    <input name="tamanho_camisa" placeholder="Tamanho Camisa">
+    <input name="numero_camisa" placeholder="Número Camisa">
 
-    <select name="categoria" class="border p-2 rounded-lg">
-        <option>Sub 13</option>
-        <option>Sub 15</option>
-        <option>Sub 17</option>
-        <option>Sub 18</option>
-        <option>Sub 19</option>
-        <option>Sub 20</option>
-        <option>Sub 21</option>
-        <option>Sub 23</option>
-        <option>Adulto</option>
-    </select>
-
-    <input name="altura" placeholder="Altura (ex: 1.75)" class="border p-2 rounded-lg">
-    <input name="telefone" placeholder="Telefone" class="border p-2 rounded-lg">
-
-    <input name="endereco" placeholder="Endereço" class="border p-2 rounded-lg col-span-2">
-
-    <input name="responsavel" placeholder="Responsável" class="border p-2 rounded-lg">
-    <input name="telefone_responsavel" placeholder="Telefone Responsável" class="border p-2 rounded-lg">
-
-    <input name="escola" placeholder="Escola" class="border p-2 rounded-lg">
-    <input name="local_treino" placeholder="Local de Treino" class="border p-2 rounded-lg">
-
-    <input name="tamanho_camisa" placeholder="Tamanho Camisa" class="border p-2 rounded-lg">
-    <input name="numero_camisa" placeholder="Número Camisa" class="border p-2 rounded-lg">
-
-    <label>Possui padrão de jogo?</label>
-    <select name="padrao_jogo" class="border p-2 rounded-lg">
-        <option value="sim">Sim</option>
+    <select name="padrao_jogo">
+        <option value="sim">Possui padrão jogo - Sim</option>
         <option value="nao">Não</option>
     </select>
 
-    <label>Possui padrão de treino?</label>
-    <select name="padrao_treino" class="border p-2 rounded-lg">
-        <option value="sim">Sim</option>
+    <select name="padrao_treino">
+        <option value="sim">Possui padrão treino - Sim</option>
         <option value="nao">Não</option>
     </select>
 
-    <button class="bg-indigo-600 text-white p-2 rounded-lg col-span-2">
-        Salvar
-    </button>
-
+    <button type="submit">Salvar</button>
 </form>
-</div>
 
 {% endblock %}
