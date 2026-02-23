@@ -1,14 +1,63 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Atletas</h1>
-<a href="/cadastrar_atleta">+ Novo Atleta</a>
-<ul>
+
+<div class="flex justify-between items-center mb-6">
+    <h2 class="text-3xl font-bold">Atletas</h2>
+
+    <a href="/cadastrar_atleta"
+       class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl shadow">
+        + Novo Atleta
+    </a>
+</div>
+
+<form method="GET" class="mb-4">
+    <select name="categoria" class="p-2 border rounded-lg">
+        <option value="">Todas categorias</option>
+        <option>Sub 13</option>
+        <option>Sub 15</option>
+        <option>Sub 17</option>
+        <option>Sub 18</option>
+        <option>Sub 19</option>
+        <option>Sub 20</option>
+        <option>Sub 21</option>
+        <option>Sub 23</option>
+        <option>Adulto</option>
+    </select>
+
+    <button class="bg-gray-800 text-white px-3 py-2 rounded-lg">
+        Filtrar
+    </button>
+</form>
+
+<div class="bg-white rounded-2xl shadow overflow-hidden">
+<table class="w-full">
+
+<thead class="bg-gray-200">
+<tr>
+<th class="p-3 text-left">Nome</th>
+<th>Categoria</th>
+<th>Nº</th>
+<th>Ações</th>
+</tr>
+</thead>
+
+<tbody>
 {% for a in atletas %}
-<li>
-    {{ a.nome }} - {{ a.categoria }}
-    <a href="/editar_atleta/{{ a.id }}">Editar</a>
-    <a href="/remover_atleta/{{ a.id }}">Remover</a>
-</li>
+<tr class="border-b hover:bg-gray-50">
+<td class="p-3">{{ a.nome }}</td>
+<td>{{ a.categoria }}</td>
+<td>{{ a.numero_camisa }}</td>
+<td class="flex gap-2 justify-center p-2">
+    <a href="/editar_atleta/{{ a.id }}"
+       class="bg-blue-500 text-white px-3 py-1 rounded-lg">Editar</a>
+    <a href="/remover_atleta/{{ a.id }}"
+       class="bg-red-500 text-white px-3 py-1 rounded-lg">Remover</a>
+</td>
+</tr>
 {% endfor %}
-</ul>
+</tbody>
+
+</table>
+</div>
+
 {% endblock %}
