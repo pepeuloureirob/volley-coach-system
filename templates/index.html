@@ -23,4 +23,34 @@
 {% endfor %}
 </div>
 
+<br><br>
+
+<h2>Competições</h2>
+
+<div class="grid">
+{% for comp in competicoes %}
+<div class="card">
+    <h3>{{ comp.nome }}</h3>
+    <p>
+        Ano: {{ comp.ano }} <br>
+        Limite: {{ comp.limite_atletas }}
+    </p>
+
+    {% if comp.inscricoes %}
+        <div class="inscricao">
+            <strong>Inscritos:</strong><br><br>
+            {% for insc in comp.inscricoes %}
+                • {{ insc.atleta.nome }} <br>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="inscricao">
+            <em>Nenhum atleta inscrito</em>
+        </div>
+    {% endif %}
+
+</div>
+{% endfor %}
+</div>
+
 {% endblock %}
