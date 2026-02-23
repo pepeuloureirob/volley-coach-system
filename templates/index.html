@@ -1,23 +1,28 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends "base.html" %}
 
-<h2 class="text-3xl font-bold mb-6">Dashboard do Professor</h2>
+{% block content %}
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-    <div class="bg-white p-6 rounded-2xl shadow">
-        <h3 class="text-gray-500">Atletas</h3>
-        <p class="text-3xl font-bold">{{ Atleta.query.count() }}</p>
+    <div class="bg-white shadow-lg rounded-2xl p-6">
+        <h2 class="text-gray-500 text-sm">Atletas</h2>
+        <p class="text-3xl font-bold text-indigo-600">
+            {{ total_atletas }}
+        </p>
     </div>
 
-    <div class="bg-white p-6 rounded-2xl shadow">
-        <h3 class="text-gray-500">Competições</h3>
-        <p class="text-3xl font-bold">{{ Competicao.query.count() }}</p>
+    <div class="bg-white shadow-lg rounded-2xl p-6">
+        <h2 class="text-gray-500 text-sm">Competições</h2>
+        <p class="text-3xl font-bold text-indigo-600">
+            {{ total_competicoes }}
+        </p>
     </div>
 
-    <div class="bg-white p-6 rounded-2xl shadow">
-        <h3 class="text-gray-500">Inscrições</h3>
-        <p class="text-3xl font-bold">{{ Inscricao.query.count() }}</p>
+    <div class="bg-white shadow-lg rounded-2xl p-6">
+        <h2 class="text-gray-500 text-sm">Inscrições</h2>
+        <p class="text-3xl font-bold text-indigo-600">
+            {{ total_inscricoes }}
+        </p>
     </div>
 
 </div>
