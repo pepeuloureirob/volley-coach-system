@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Nova Competição</h1>
-<form method="post">
-<input name="nome" placeholder="Nome">
-<input name="limite_atletas" placeholder="Limite">
-<button>Criar</button>
+
+<h2>Nova Competição</h2>
+
+<form method="POST">
+    <input name="nome" placeholder="Nome" required>
+    <input name="ano" placeholder="Ano" required>
+    <input name="limite" placeholder="Limite de atletas" required>
+
+    <button type="submit">Criar</button>
 </form>
+
 {% endblock %}
