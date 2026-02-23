@@ -1,75 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <title>Sistema do Professor</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
-<h1>Dashboard</h1>
+<header>
+    <h1>Sistema do Professor</h1>
+</header>
 
-<h2>Novo Atleta</h2>
-<form method="POST" action="/novo_atleta">
-    <input name="nome" placeholder="Nome" required>
-    <input name="cpf" placeholder="CPF" required>
-    <input name="data_nascimento" placeholder="Nascimento" required>
-    <input name="categoria" placeholder="Categoria" required>
-    <button type="submit">Salvar</button>
-</form>
+<main>
 
-<h2>Nova Competição</h2>
-<form method="POST" action="/nova_competicao">
-    <input name="nome" placeholder="Nome" required>
-    <input name="ano" placeholder="Ano" required>
-    <input name="limite_atletas" placeholder="Limite" required>
-    <button type="submit">Criar</button>
-</form>
+<section class="painel">
 
-<hr>
+    <!-- NOVO ATLETA -->
+    <div class="box">
+        <h2>Novo Atleta</h2>
+        <form method="POST" action="/novo_atleta">
+            <input name="nome" placeholder="Nome" required>
+            <input name="cpf" placeholder="CPF" required>
+            <input name="data_nascimento" placeholder="Nascimento" required>
+            <input name="categoria" placeholder="Categoria" required>
+            <button type="submit">Salvar</button>
+        </form>
+    </div>
 
-<h2>Atletas</h2>
-<div class="grid">
-{% for atleta in atletas %}
-<div class="card">
-    <strong>{{ atleta.nome }}</strong><br><br>
+    <!-- NOVA COMPETIÇÃO -->
+    <div class="box">
+        <h2>Nova Competição</h2>
+        <form method="POST" action="/nova_competicao">
+            <input name="nome" placeholder="Nome" required>
+            <input name="ano" placeholder="Ano" required>
+            <input name="limite_atletas" placeholder="Limite" required>
+            <button type="submit">Criar</button>
+        </form>
+    </div>
 
-    {% for comp in competicoes %}
-        <a href="/inscrever/{{ atleta.id }}/{{ comp.id }}">
-            Inscrever em {{ comp.nome }}
-        </a><br>
-    {% endfor %}
+</section>
 
-    <br>
-    <a href="/excluir_atleta/{{ atleta.id }}">Excluir</a>
-</div>
-{% endfor %}
-</div>
+<!-- ATLETAS -->
+<section>
+    <h2>Atletas</h2>
 
-<hr>
+    <div class="grid">
+        {% for atleta in atletas %}
+        <div class="card">
 
-<h2>Competições</h2>
-<div class="grid">
-{% for comp in competicoes %}
-<div class="card">
-    <strong>{{ comp.nome }}</strong><br>
-    Ano: {{ comp.ano }}<br>
-    Limite: {{ comp.limite_atletas }}<br><br>
+            <div class="card-header">
+                <strong>{{ atleta.nome }}</strong>
+                <span class="categoria">{{ atleta.categoria }}</span>
+            </div>
 
-    {% if comp.inscricoes %}
-        <strong>Inscritos:</strong><br><br>
-        {% for insc in comp.inscricoes %}
-            • {{ insc.atleta.nome }}
-            <a href="/remover_inscricao/{{ insc.id }}">❌</a><br>
+            <div class="acoes">
+                {% for comp in competicoes %}
+                <a class="btn-inscrever" href="/inscrever/{{ atleta.id }}/{{ comp.id }}">
+                    + {{ comp.nome }}
+                </a>
+                {% endfor %}
+            </div>
+
+            <a class="btn-excluir" href="/excluir_atleta/{{ atleta.id }}">Excluir</a>
+
+        </div>
         {% endfor %}
-    {% else %}
-        <em>Nenhum atleta inscrito</em>
-    {% endif %}
+    </div>
+</section>
 
-    <br>
-    <a href="/excluir_competicao/{{ comp.id }}">Excluir</a>
-</div>
-{% endfor %}
-</div>
+<!-- COMPETIÇÕES -->
+<section>
+    <h2>Competições</h2>
+
+    <div class="grid">
+        {% for comp in competicoes %}
+        <div class="card">
+
+            <div class="card-header">
+                <strong>{{ comp.nome }}</strong>
+                <span class="ano">{{ comp.ano }}</span>
+            </div>
+
+            <div class="info">
+                Limite: {{ comp.limite_atletas }}
+            </div>
+
+            <div class="inscritos">
+                {% if comp.inscricoes %}
+                    {% for insc in comp.inscricoes %}
+                        <div class="inscrito">
+                            {{ insc.atleta.nome }}
+                            <a href="/remover_inscricao/{{ insc.id }}">❌</a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <em>Nenhum atleta inscrito</em>
+                {% endif %}
+            </div>
+
+            <a class="btn-excluir" href="/excluir_competicao/{{ comp.id }}">Excluir</a>
+
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+</main>
 
 </body>
 </html>
