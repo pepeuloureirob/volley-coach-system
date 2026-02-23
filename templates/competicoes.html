@@ -1,29 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1 class="text-2xl font-bold mb-4">Competições</h1>
+<div class="flex justify-between mb-6">
+    <h2 class="text-3xl font-bold">Competições</h2>
 
-<a href="/cadastrar_competicao" class="bg-indigo-600 text-white px-4 py-2 rounded-lg">
-+ Nova Competição
-</a>
+    <a href="/cadastrar_competicao"
+       class="bg-indigo-600 text-white px-4 py-2 rounded-xl">
+        + Nova Competição
+    </a>
+</div>
 
-<table class="w-full mt-4">
+<div class="bg-white rounded-2xl shadow">
+<table class="w-full">
 <thead class="bg-gray-200">
 <tr>
-<th class="p-2">Nome</th>
+<th class="p-3 text-left">Nome</th>
 <th>Ano</th>
 <th>Limite</th>
 </tr>
 </thead>
+
 <tbody>
-{% for comp in competicoes %}
-<tr class="border-b">
-<td class="p-2">{{ comp.nome }}</td>
-<td>{{ comp.ano }}</td>
-<td>{{ comp.limite }}</td>
+{% for c in competicoes %}
+<tr class="border-b hover:bg-gray-50">
+<td class="p-3">{{ c.nome }}</td>
+<td>{{ c.ano }}</td>
+<td>{{ c.limite }}</td>
 </tr>
 {% endfor %}
 </tbody>
 </table>
+</div>
 
 {% endblock %}
