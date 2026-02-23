@@ -1,8 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Dashboard</h1>
-<div class="cards">
-    <div class="card">Atletas<br><strong>{{ total_atletas }}</strong></div>
-    <div class="card">Competições<br><strong>{{ total_competicoes }}</strong></div>
+
+<h2>Atletas</h2>
+
+<div class="grid">
+{% for atleta in atletas %}
+<div class="card">
+    <h3>{{ atleta.nome }}</h3>
+    <p>{{ atleta.categoria }}</p>
+
+    <a href="/editar_atleta/{{ atleta.id }}">Editar</a>
+    <a href="/remover_atleta/{{ atleta.id }}">Remover</a>
+
+    <div class="inscricao">
+        {% for comp in competicoes %}
+            <a href="/inscrever/{{ atleta.id }}/{{ comp.id }}">
+                Inscrever em {{ comp.nome }}
+            </a>
+        {% endfor %}
+    </div>
 </div>
+{% endfor %}
+</div>
+
 {% endblock %}
