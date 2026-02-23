@@ -172,13 +172,15 @@ def inscrever(competicao_id):
     atletas = Atleta.query.all()
     return render_template('inscrever.html', competicao=competicao, atletas=atletas)
     
-    @app.route('/inscricoes')
+    # ---------------- INSCRIÇÕES ----------------
+
+@app.route('/inscricoes')
 def inscricoes():
     lista = Inscricao.query.all()
     return render_template('inscricoes.html', inscricoes=lista)
+
 
 # ---------------- MAIN ----------------
 
 if __name__ == '__main__':
     app.run(debug=True)
-    
